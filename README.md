@@ -2,7 +2,7 @@
 
 ## 1. O que é?
 
-O projeto **ChamadoJá** é uma API para auxiliar o serviço de suporte técnico. Nessa API, os cliente poderão abrir chamados com os dados de:  nome do chamado, categoria, descrição e o funcionário poderá ter acesso aos dados do cliente, aos dados dos chamados, classificar o nível de prioridado, alterar o status do atendimento e adicionar comentários. Além disso, o funcionário poderá filtrar os chamados por prioridades, status e com paginações.
+O projeto **ChamadoJá** é uma API para auxiliar o serviço de suporte técnico. Nessa API, os clientes poderão abrir chamados com os dados de:  nome do chamado, categoria, descrição. Os funcionários poderão ter acesso aos dados dos clientes, aos dados dos chamados, classificar o nível de prioridade, alterar o status do atendimento e adicionar comentários. Além disso, o funcionário poderá filtrar os chamados por prioridades e status.
 
 Desse modo será possível:
 

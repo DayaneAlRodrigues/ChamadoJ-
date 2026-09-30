@@ -12,3 +12,11 @@ Durante a primeira parte da semana, foram realizadas as seguintes atividades:
 - Criação e organização do diário de desenvolvimento.
 
 Para realizar essas atividades, foi utilizado o **PDF de orientação do Projeto Integrador**, disponibilizado como material de referência para o desenvolvimento do projeto.
+
+Durante a segunda parte da semana, foi realizado o contrato da api. Esse contrato descreve:
+- as rotas que serão disponibilizadas pela API;
+- divisão de rotas de usuários, categorias e chamados;
+- parâmetros de rotas;
+- exemplos de parâmetros de request body; 
+- exemplos de responses;
+- query parameters para utilização de filtros e paginação em chamados.

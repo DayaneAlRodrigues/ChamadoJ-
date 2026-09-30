@@ -70,32 +70,30 @@ Objetivo: Listar usuários
 
 Objetivo: Consultar um usuário específico
 
-**Request Body:**
+##### Parâmetro da rota
 
-```json
-{
-    "id": 1
-}
-```
-**Parâmetros do body:**
 | Parâmetro | Tipo | Obrigatório | Descrição |
 |---|---|---|---|
-| id | integer | sim | Id do Usuário |
+| `id` | integer | Sim | Identificador do usuario |
 
+**Exemplo:**
+
+```http
+GET /api/usuarios/1
+```
 
 **Response body:**
-
+Status: 200 OK
 ```json
 {
     "id": 1,
     "nome": "Maria Silva",
-    "email": "maria@email.com",
-    "senha": "Senha@123"
+    "email": "maria@email.com"
 }
 
 ```
 
-#### Resumo das rotas de Usuários
+##### Resumo das rotas de Usuários
 
 | Método | Rota | Objetivo |
 |---|---|---|
@@ -164,17 +162,17 @@ Objetivo: Listar categorias
 
 Objetivo: Consultar uma categoria específica
 
-**Request Body:**
+##### Parâmetro da rota
 
-```json
-{
-    "id": "1"
-}
-```
-**Parâmetros do body:**
 | Parâmetro | Tipo | Obrigatório | Descrição |
 |---|---|---|---|
-| id | integer | sim | Id da categoria |
+| `id` | integer | Sim | Identificador de categorias |
+
+**Exemplo:**
+
+```http
+GET /api/categorias/1
+```
 
 **Response Body:**
 
@@ -224,7 +222,9 @@ Objetivo: Abrir um chamado
     "id_usuario": 1,
     "id_categoria": 1,
     "descricao": "Servidor parou de funcionar",
-    "status": "Aberto"
+    "status": "Aberto",
+    "created_at": "2026-09-30T10:00:00Z",
+    "updated_at": "2026-09-30T13:00:00Z"
 }
 ```
 ### GET  `/api/chamados`
@@ -243,7 +243,9 @@ Objetivo: Listar chamados
     "descricao": "Servidor parou de funcionar",
     "status": "Em atendimento",
     "prioridade": "Urgente",
-    "comentarios": "Esse chamado possui alto grau de problema em cascata"
+    "comentarios": "Esse chamado possui alto grau de problema em cascata",
+    "created_at": "2026-09-30T10:00:00Z",
+    "updated_at": "2026-09-30T13:00:00Z"
 
 },
 {
@@ -253,7 +255,10 @@ Objetivo: Listar chamados
     "descricao": "Sistema Operacional está reiniciando o computador",
     "status": "Aberto",
     "prioridade": "Alta",
-    "comentarios": "Esse chamado deve ser resolvido"
+    "comentarios": "Esse chamado deve ser resolvido",
+    "created_at": "2026-09-30T10:00:00Z",
+    "updated_at": "2026-09-30T13:00:00Z"
+    
 },
 {
     "id": 3,
@@ -262,7 +267,9 @@ Objetivo: Listar chamados
     "descricao": "Impressora precisa de troca de tinta",
     "status": "Fechado",
     "prioridade": "Baixa",
-    "comentarios": "Esse chamado já foi resolvido"
+    "comentarios": "Esse chamado já foi resolvido",
+    "created_at": "2026-09-30T10:00:00Z",
+    "updated_at": "2026-09-30T13:00:00Z"
 }
 
 ]
@@ -271,18 +278,17 @@ Objetivo: Listar chamados
 
 Objetivo: Consultar um chamado específico
 
-**Request Body:**
+##### Parâmetro da rota
 
-```json
-{
-    "id": 1
-}
-```
-**Parâmetros do body:**
 | Parâmetro | Tipo | Obrigatório | Descrição |
 |---|---|---|---|
-| id | integer | sim | Id do chamado |
+| `id` | integer | Sim | Identificador do chamado |
 
+**Exemplo:**
+
+```http
+GET /api/chamados/1
+```
 
 **Response Body:**
 
@@ -294,7 +300,9 @@ Objetivo: Consultar um chamado específico
     "descricao": "Servidor parou de funcionar",
     "status": "Em atendimento",
     "prioridade": "Urgente",
-    "comentarios": "Esse chamado possui alto grau de problema em cascata"
+    "comentarios": "Esse chamado possui alto grau de problema em cascata",
+    "created_at": "2026-09-30T10:00:00Z",
+    "updated_at": "2026-09-30T13:00:00Z"
 }
 ```
 
@@ -302,7 +310,7 @@ Objetivo: Consultar um chamado específico
 
 Objetivo: Atualizar dados de um chamado
 
-#### Parâmetro da rota
+##### Parâmetro da rota
 
 | Parâmetro | Tipo | Obrigatório | Descrição |
 |---|---|---|---|
@@ -312,7 +320,7 @@ Objetivo: Atualizar dados de um chamado
 
 ```http
 PATCH /api/chamados/1
-
+```
 **Request Body:**
 
 ```json
@@ -340,10 +348,183 @@ PATCH /api/chamados/1
     "descricao": "Servidor parou de funcionar",
     "status": "Resolvido",
     "prioridade": "Urgente",
-    "comentarios": "Esse chamado possui alto grau de problema em cascata"
+    "comentarios": "Esse chamado possui alto grau de problema em cascata",
+    "created_at": "2026-09-30T10:00:00Z",
+    "updated_at": "2026-09-30T13:00:00Z"
 }
 ```
 
+### POST `/api/chamados/{id}/comentarios`
+
+Objetivo: Adicionar um comentário ao chamado
+
+##### Parâmetro da rota
+
+| Parâmetro | Tipo | Obrigatório | Descrição |
+|---|---|---|---|
+| `id` | integer | Sim | Identificador do chamado |
+
+**Exemplo:**
+
+```http
+POST /api/chamados/1/comentarios
+```
+**Request Body:**
+
+```json
+{
+    "comentario": "Esse chamado possui alto grau de problema em cascata, que comprometeu outros serviços"
+}
+```
+**Parâmetros do body:**
+| Parâmetro | Tipo | Obrigatório | Descrição |
+|---|---|---|---|
+| comentario | string | Comentario do atendente do chamado |
+
+
+**Response Body:**
+
+```json
+{
+    "id": 1,
+    "id_usuario": 1,
+    "id_categoria": 1,
+    "descricao": "Servidor parou de funcionar",
+    "status": "Resolvido",
+    "prioridade": "Urgente",
+    "comentarios": "Esse chamado possui alto grau de problema em cascata, que comprometeu outros serviços",
+    "created_at": "2026-09-30T10:00:00Z",
+    "updated_at": "2026-09-30T13:00:00Z"
+}
+```
+
+### PATCH `/api/chamados/{id}/status`
+
+Objetivo: Alterar o status do chamado
+
+##### Parâmetro da rota
+
+| Parâmetro | Tipo | Obrigatório | Descrição |
+|---|---|---|---|
+| `id` | integer | Sim | Identificador do chamado |
+
+**Exemplo:**
+
+```http
+PATCH /api/chamados/1/status
+```
+**Request Body:**
+
+```json
+{
+    "status": "Fechado"
+}
+```
+**Parâmetros do body:**
+| Parâmetro | Tipo | Obrigatório | Descrição |
+|---|---|---|---|
+| status | string | Mudança do status do chamado |
+
+
+**Response Body:**
+
+```json
+{
+    "id": 1,
+    "id_usuario": 1,
+    "id_categoria": 1,
+    "descricao": "Servidor parou de funcionar",
+    "status": "Fechado",
+    "prioridade": "Urgente",
+    "comentarios": "Esse chamado possui alto grau de problema em cascata",
+    "created_at": "2026-09-30T10:00:00Z",
+    "updated_at": "2026-09-30T13:00:00Z"
+}
+```
+
+### GET `/api/chamados/{id}/historico`
+
+Objetivo: Consultar o histórico de alterações do chamado 
+
+##### Parâmetro da rota
+
+| Parâmetro | Tipo | Obrigatório | Descrição |
+|---|---|---|---|
+| `id` | integer | Sim | Identificador do chamado |
+
+**Exemplo:**
+
+```http
+GET /api/chamados/1/historico
+```
+
+**Response Body:**
+
+```json
+[
+    {
+    "id": 1,
+    "id_usuario": 1,
+    "id_categoria": 1,
+    "descricao": "Servidor parou de funcionar",
+    "status": "Em atendimento",
+    "prioridade": "Urgente",
+    "comentarios": "Esse chamado possui alto grau de problema em cascata",
+    "created_at": "2026-09-30T10:00:00Z",
+    "updated_at": "2026-09-30T13:00:00Z"
+
+},{
+    "id": 1,
+    "id_usuario": 1,
+    "id_categoria": 1,
+    "descricao": "Servidor parou de funcionar",
+    "status": "Resolvido",
+    "prioridade": "Urgente",
+    "comentarios": "Esse chamado possui alto grau de problema em cascata, que comprometeu outros serviços",
+    "created_at": "2026-09-30T10:00:00Z",
+    "updated_at": "2026-09-30T13:00:00Z"
+},
+{
+    "id": 1,
+    "id_usuario": 1,
+    "id_categoria": 1,
+    "descricao": "Servidor parou de funcionar",
+    "status": "Finalizado",
+    "prioridade": "Urgente",
+    "comentarios": "Esse chamado possui alto grau de problema em cascata , que comprometeu outros serviços",
+    "created_at": "2026-09-30T10:00:00Z",
+    "updated_at": "2026-09-30T13:00:00Z"
+}
+]
+
+```
+### GET `/api/chamados/resumo`
+
+Objetivo: Consultar um resumo dos chamados cadastrados no sistema
+
+**Response Body**
+
+Status: `200 OK`
+
+```json
+{
+    "total_chamados": 25,
+    "por_status": {
+        "aberto": 8,
+        "em_atendimento": 7,
+        "resolvido": 6,
+        "fechado": 4
+    },
+    "por_prioridade": {
+        "baixa": 5,
+        "media": 10,
+        "alta": 7,
+        "urgente": 3
+    }
+}
+```
+
+#### Resumo das rotas de chamados
 
 | Método | Rota | Objetivo |
 |---|---|---|
@@ -354,13 +535,31 @@ PATCH /api/chamados/1
 | `POST` | `/api/chamados/{id}/comentarios` | Adicionar um comentário ao chamado |
 | `PATCH` | `/api/chamados/{id}/status` | Alterar o status do chamado |
 | `GET` | `/api/chamados/{id}/historico` | Consultar o histórico de alterações do chamado |
+| `GET`| `/api/chamados/resumo` | Consultar um resumo dos chamados cadastrados no sistema |
 
 ## Filtros e Paginação
 
-A listagem de chamados deverá permitir filtros e paginação por meio de
-parâmetros de consulta (`query parameters`).
+Os filtros e a paginação são realizados por meio de Query Parameters na rota de listagem de chamados.
 
-### Filtrar por status
+GET /api/chamados 
 
-```http
-GET /api/chamados?status=aberto
+#### Query Parameters
+
+| Parâmetro | Tipo | Obrigatório | Descrição | Exemplo |
+|---|---|---|---|---|
+| status | string | não | filtra os chamados pelo status | `/api/chamados?status=aberto`|
+| prioridade | string | não | filtra os chamados pela prioridade | `/api/chamados?prioridade=urgente`|
+| categoria_id | integer | não | filtra os chamados pelo identificador de categoria | `/api/chamados?categoria_id=1` |
+| page | integer | não | Número da página que será consultada | `/api/chamados?page=1` |
+| per_page | integer | não | Quantidade de chamados por página | `/api/chamados?per_page=10` |
+
+#### Utilizar paginação 
+GET /api/chamados?page=2&per_page=10
+
+O response retorna a página 2, no qual cada página tem 10 chamados.
+
+#### Utilizar filtros e paginação juntos
+
+GET /api/chamados?status=aberto&prioridade=urgente&categoria_id=1&page=1&per_page=10
+
+Ao utilizar o & pode-se usar mais de um query parameter.

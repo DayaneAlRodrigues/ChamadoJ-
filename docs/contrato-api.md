@@ -47,20 +47,17 @@ Objetivo: Listar usuários
 {
     "id": 1,
     "nome": "Maria Silva",
-    "email": "maria@email.com",
-    "senha": "Senha@123"
+    "email": "maria@email.com"
 },
 {
     "id":2,
     "nome": "José Rodrigues",
-    "email": "jose@email.com",
-    "senha": "Senha@456"
+    "email": "jose@email.com"
 },
 {
     "id" : 3,
     "nome": "Carla Fonseca",
-    "email": "carla@email.com",
-    "senha": "Senha@789"
+    "email": "carla@email.com"
 }
 ]
 
@@ -111,14 +108,14 @@ Objetivo: Cadastrar uma categoria
 
 ```json
 {
-    "nomeCategoria": "Servidor",
+    "nome_categoria": "Servidor",
     "tipo": "infraestrutura"
 }
 ```
 **Parâmetros do body:**
 | Parâmetro | Tipo | Obrigatório | Descrição |
 |---|---|---|---|
-| nomeCategoria | string | sim | Nome da categoria |
+| nome_categoria | string | sim | Nome da categoria |
 | tipo | string | sim | Tipo de categoria |
 
 **Response Body:**
@@ -126,7 +123,7 @@ Objetivo: Cadastrar uma categoria
 ```json
 {
     "id": 1,
-    "nomeCategoria": "Servidor",
+    "nome_categoria": "Servidor",
     "tipo": "infraestrutura"
 }
 ```
@@ -141,17 +138,17 @@ Objetivo: Listar categorias
 [
     {
     "id": 1,
-    "nomeCategoria": "Servidor",
+    "nome_categoria": "Servidor",
     "tipo": "infraestrutura"
 },
 {
     "id": 2,
-    "nomeCategoria": "Sistema Operacional",
+    "nome_categoria": "Sistema Operacional",
     "tipo": "software"
 },
 {
     "id": 3,
-    "nomeCategoria": "Impressora",
+    "nome_categoria": "Impressora",
     "tipo": "Hardware"
 }
 ]
@@ -179,7 +176,7 @@ GET /api/categorias/1
 ```json
 {
     "id": 1,
-    "nomeCategoria": "Servidor",
+    "nome_categoria": "Servidor",
     "tipo": "infraestrutura"
 }
 ```
@@ -201,16 +198,18 @@ Objetivo: Abrir um chamado
 
 ```json
 {
-    "id_usuario": 1,
-    "id_categoria": 1,
+    "usuario_id": 1,
+    "categoria_id": 1,
+    "titulo" : "Servidor com erro",
     "descricao": "Servidor parou de funcionar"
 }
 ```
 **Parâmetros do body:**
 | Parâmetro | Tipo | Obrigatório | Descrição |
 |---|---|---|---|
-| id_usuario | integer | sim | Id do usuário |
-| id_categoria | integer | sim | Id da categoria |
+| usuario_id | integer | sim | Id do usuário |
+| categoria_id | integer | sim | Id da categoria |
+| titulo  | string | não | Titulo da categoria |
 | descricao | string | sim | Descrição do chamado |
 
 
@@ -219,8 +218,9 @@ Objetivo: Abrir um chamado
 ```json
 {
     "id": 1,
-    "id_usuario": 1,
-    "id_categoria": 1,
+    "usuario_id": 1,
+    "categoria_id": 1,
+    "titulo" : "Servidor com erro",
     "descricao": "Servidor parou de funcionar",
     "status": "Aberto",
     "created_at": "2026-09-30T10:00:00Z",
@@ -238,10 +238,11 @@ Objetivo: Listar chamados
 [
     {
     "id": 1,
-    "id_usuario": 1,
-    "id_categoria": 1,
+    "usuario_id": 1,
+    "categoria_id": 1,
+    "titulo" : "Servidor com erro",
     "descricao": "Servidor parou de funcionar",
-    "status": "Em atendimento",
+    "status": "Aberto",
     "prioridade": "Urgente",
     "comentarios": "Esse chamado possui alto grau de problema em cascata",
     "created_at": "2026-09-30T10:00:00Z",
@@ -250,8 +251,9 @@ Objetivo: Listar chamados
 },
 {
     "id": 2,
-    "id_usuario": 2,
-    "id_categoria": 2,
+    "usuario_id": 2,
+    "categoria_id": 2,
+    "titulo":"SO com erro",
     "descricao": "Sistema Operacional está reiniciando o computador",
     "status": "Aberto",
     "prioridade": "Alta",
@@ -262,8 +264,9 @@ Objetivo: Listar chamados
 },
 {
     "id": 3,
-    "id_usuario": 3,
-    "id_categoria": 3,
+    "usuario_id": 3,
+    "categoria_id": 3,
+    "titulo": "Impressora",
     "descricao": "Impressora precisa de troca de tinta",
     "status": "Fechado",
     "prioridade": "Baixa",
@@ -295,8 +298,9 @@ GET /api/chamados/1
 ```json
 {
     "id": 1,
-    "id_usuario": 1,
-    "id_categoria": 1,
+    "usuario_id": 1,
+    "categoria_id": 1,
+    "titulo": "Servidor com erro",
     "descricao": "Servidor parou de funcionar",
     "status": "Em atendimento",
     "prioridade": "Urgente",
@@ -325,7 +329,7 @@ PATCH /api/chamados/1
 
 ```json
 {
-    "id_categoria": 2,
+    "categoria_id": 2,
     "descricao": "Servidor parou de funcionar completamente",
     "prioridade": "urgente"
 }
@@ -333,7 +337,7 @@ PATCH /api/chamados/1
 **Parâmetros do body:**
 | Parâmetro | Tipo | Obrigatório | Descrição |
 |---|---|---|---|
-| id_categoria | integer | sim | Id da categoria |
+| categoria_id | integer | sim | Id da categoria |
 | descricao | string | sim | Descrição do chamado |
 | prioridade | string | Prioridade para o atendimento do chamado |
 
@@ -343,9 +347,10 @@ PATCH /api/chamados/1
 ```json
 {
     "id": 1,
-    "id_usuario": 1,
-    "id_categoria": 1,
-    "descricao": "Servidor parou de funcionar",
+    "usuario_id": 1,
+    "categoria_id": 1,
+    "titulo": "Servidor com erro",
+    "descricao": "Servidor parou de funcionar completamente",
     "status": "Resolvido",
     "prioridade": "Urgente",
     "comentarios": "Esse chamado possui alto grau de problema em cascata",
@@ -387,8 +392,9 @@ POST /api/chamados/1/comentarios
 ```json
 {
     "id": 1,
-    "id_usuario": 1,
-    "id_categoria": 1,
+    "usuario_id": 1,
+    "categoria_id": 1,
+    "titulo":"Servidor com erro",
     "descricao": "Servidor parou de funcionar",
     "status": "Resolvido",
     "prioridade": "Urgente",
@@ -431,8 +437,9 @@ PATCH /api/chamados/1/status
 ```json
 {
     "id": 1,
-    "id_usuario": 1,
-    "id_categoria": 1,
+    "usuario_id": 1,
+    "categoria_id": 1,
+    "titulo": "Servidor com erro",
     "descricao": "Servidor parou de funcionar",
     "status": "Fechado",
     "prioridade": "Urgente",
@@ -464,36 +471,27 @@ GET /api/chamados/1/historico
 [
     {
     "id": 1,
-    "id_usuario": 1,
-    "id_categoria": 1,
-    "descricao": "Servidor parou de funcionar",
-    "status": "Em atendimento",
-    "prioridade": "Urgente",
-    "comentarios": "Esse chamado possui alto grau de problema em cascata",
-    "created_at": "2026-09-30T10:00:00Z",
-    "updated_at": "2026-09-30T13:00:00Z"
+    "status": "Aberto",
+    "data": "2026-09-30T13:00:00Z",
+    "chamado_id": 1
 
 },{
     "id": 1,
-    "id_usuario": 1,
-    "id_categoria": 1,
-    "descricao": "Servidor parou de funcionar",
-    "status": "Resolvido",
-    "prioridade": "Urgente",
-    "comentarios": "Esse chamado possui alto grau de problema em cascata, que comprometeu outros serviços",
-    "created_at": "2026-09-30T10:00:00Z",
-    "updated_at": "2026-09-30T13:00:00Z"
+    "status": "Em atendimento",
+    "data": "2026-10-02T13:00:00Z",
+    "chamado_id": 1
 },
 {
     "id": 1,
-    "id_usuario": 1,
-    "id_categoria": 1,
-    "descricao": "Servidor parou de funcionar",
-    "status": "Finalizado",
-    "prioridade": "Urgente",
-    "comentarios": "Esse chamado possui alto grau de problema em cascata , que comprometeu outros serviços",
-    "created_at": "2026-09-30T10:00:00Z",
-    "updated_at": "2026-09-30T13:00:00Z"
+    "status": "Resolvido",
+    "data": "2026-10-05T13:00:00Z",
+    "chamado_id": 1
+},
+{
+    "id": 1,
+    "status": "Fechado",
+    "data": "2026-10-06T13:00:00Z",
+    "chamado_id": 1
 }
 ]
 

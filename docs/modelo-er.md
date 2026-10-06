@@ -23,10 +23,13 @@
 
 ## Entidade: `comentarios`
 
-| Campo           | Tipo    | Restrições                |
-| --------------- | ------- | ------------------------- |
-| `id_comentario` | integer | PK, incremento automático |
-| `comentario`    | varchar | NOT NULL                  |
+| Campo           | Tipo      | Restrições                           |
+| --------------- | -------   | -------------------------------------|
+| `id_comentario` | integer   | PK, incremento automático            |
+| `comentario`    | varchar   | NOT NULL                             |
+| `chamado_id`    | integer   | FK → `chamados.id_chamado`, NOT NULL |
+| `usuario_id`    | integer   | FK → `usuarios.id_usuario`, NOT NULL |
+| `created_at`    | timestamp | —                                    |
 
 ---
 
@@ -43,7 +46,6 @@
 | `updated_at`    | timestamp | —                                          |
 | `usuario_id`    | integer   | FK → `usuarios.id_usuario`, NOT NULL       |
 | `categoria_id`  | integer   | FK → `categorias.id_categoria`, NOT NULL   |
-| `comentario_id` | integer   | FK → `comentarios.id_comentario`, NOT NULL |
 
 ---
 
@@ -53,8 +55,10 @@
 | -------------- | --------- | ------------------------------------ |
 | `id_historico` | integer   | PK, incremento automático            |
 | `status`       | varchar   | NOT NULL                             |
-| `data`         | timestamp | —                                    |
+| `created_at`   | timestamp | —                                    |
 | `chamado_id`   | integer   | FK → `chamados.id_chamado`, NOT NULL |
+| `usuario_id`   | integer   | FK → `usuarios.id_usuario`, NOT NULL |
+
 
 ---
 
@@ -63,4 +67,6 @@
 * `usuarios` **1:N** `chamados`
 * `categorias` **1:N** `chamados`
 * `comentarios` **N:1** `chamados`
+* `usuarios` **1:N** `comentarios`
 * `chamados` **1:N** `historico_status`
+* `usuarios` **1:N** `historico_status`

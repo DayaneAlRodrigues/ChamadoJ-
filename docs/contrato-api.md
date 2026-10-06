@@ -472,26 +472,30 @@ GET /api/chamados/1/historico
     {
     "id": 1,
     "status": "Aberto",
-    "data": "2026-09-30T13:00:00Z",
-    "chamado_id": 1
+    "created_at": "2026-09-30T13:00:00Z",
+    "chamado_id": 1,
+    "usuario_id": 1
 
 },{
     "id": 1,
     "status": "Em atendimento",
-    "data": "2026-10-02T13:00:00Z",
-    "chamado_id": 1
+    "created_at": "2026-10-02T13:00:00Z",
+    "chamado_id": 1,
+    "usuario_id": 1
 },
 {
     "id": 1,
     "status": "Resolvido",
-    "data": "2026-10-05T13:00:00Z",
-    "chamado_id": 1
+    "created_at": "2026-10-05T13:00:00Z",
+    "chamado_id": 1,
+    "usuario_id": 1
 },
 {
     "id": 1,
     "status": "Fechado",
-    "data": "2026-10-06T13:00:00Z",
-    "chamado_id": 1
+    "created_at": "2026-10-06T13:00:00Z",
+    "chamado_id": 1,
+    "usuario_id": 1
 }
 ]
 

@@ -20,3 +20,5 @@ Durante a segunda parte da semana, foi realizado o contrato da api. Esse contrat
 - exemplos de parâmetros de request body; 
 - exemplos de responses;
 - query parameters para utilização de filtros e paginação em chamados.
+
+Foi utilizado IA para gerar seeder de inserção de dados para comentários de chamadose e histórico de status.

@@ -32,3 +32,12 @@ Os artefatos da primeira semana são:
 - docs/diario.md
 - docs/contrato-api.md
 
+
+A segunda semana (05/10/26 - 10/11/26) teve como foco a modelagem do banco relacional em Postegresql e as consultas. 
+Nesta semana os artefatos produzidos foram:
+- docs/modelo-er.md
+- docs/modelo-er.png
+- docs/decisoes-banco.md
+- database/schema.sql
+- database/seed.sql
+- docs/consultas.sql

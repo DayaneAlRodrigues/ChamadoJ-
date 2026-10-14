@@ -12,7 +12,10 @@ class Comentario extends Model
         'id_comentario',
         'comentario',
         'created_at',
-        'chamado_id',
-        'usuario_id'
+        'chamado_id'
     ];
+
+    public function chamado(){
+        return $this->belongsTo('App/Chamado', 'chamado_id', 'id_chamado');
+    }
 }

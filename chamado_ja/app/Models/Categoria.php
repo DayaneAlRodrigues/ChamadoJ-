@@ -14,4 +14,8 @@ class Categoria extends Model
         'nome_categoria',
         'tipo'
     ];
+
+    public function chamado(){
+        return $this->hasMany('App/Chamado', 'id_categoria','categoria_id');
+    }
 }

@@ -12,7 +12,10 @@ class HistoricoStatus extends Model
         'id_historico',
         'status',
         'created_at',
-        'chamado_id',
-        'usuario_id'
+        'chamado_id'
     ];
+
+    public function chamado(){
+        return $this->hasMany('App/Chamado', 'chamado_id','id_chamado');
+    }
 }

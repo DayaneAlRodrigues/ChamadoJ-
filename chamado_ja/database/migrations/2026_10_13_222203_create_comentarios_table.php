@@ -20,11 +20,6 @@ return new class extends Migration
                         table:'chamados',
                         column:'id_chamado'
                     );
-            $table->foreignId('usuario_id')
-                    ->constrained(
-                        table:'usuarios',
-                        column:'id_usuario'
-                    );
         });
     }
 

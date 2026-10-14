@@ -19,4 +19,20 @@ class Chamado extends Model
         'usuario_id',
         'categoria_id'
     ];
+
+    public function usuario(){
+        return $this->belongsTo('App/Usuario', 'usuario_id', 'id_usuario');
+    }
+
+    public function categoria(){
+        return $this->belongsTo('App/Categoria','categoria_id','id_categoria');
+    }
+
+    public function comentario(){
+        return $this->hasMany('App/Comentario', 'id_chamado', 'chamado_id');
+    }
+
+    public function historico(){
+        return $this->hasMany('App/HistoricoStatus', 'id_chamado','chamado_id');
+    }
 }

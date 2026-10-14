@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id('id_chamado');
             $table->string('titulo');
             $table->string('descricao');
-            $table->string('status');
-            $table->string('prioridade');
+            $table->string('status')->default('aberto')->index();
+            $table->string('prioridade')->index();
             $table->timestamps('created_at');
             $table->timestamps('updated_at');
             $table->foreignId('usuario_id')

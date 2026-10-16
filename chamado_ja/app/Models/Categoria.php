@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Categoria extends Model
 {
+    use HasFactory;
     protected $table='categorias';
     protected $primaryKey='id_categoria';
+     public $timestamps = false;
 
     protected $fillable=[
         'id_categoria',
@@ -15,7 +18,7 @@ class Categoria extends Model
         'tipo'
     ];
 
-    public function chamado(){
-        return $this->hasMany('App/Chamado', 'id_categoria','categoria_id');
+    public function chamados(){
+        return $this->hasMany(Chamado::class, 'categoria_id','id_categoria');
     }
 }

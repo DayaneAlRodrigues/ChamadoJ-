@@ -34,3 +34,23 @@ Também foi desenvolvido um arquivo para explicar as decisões da modelagem e o 
 
 A segunda parte da semana, desenvolvi o schema para implementação do banco. O seed, que são os dados para testar a aplicação no banco e as consultas baseadas nas que foram requisitadas na instrução do exercício. 
 Foi utilizado IA para gerar seeder de inserção de dados para comentários de chamadose e histórico de status.
+
+## Semana 3 - Base Laravel e persistência (12/10/26 - 17/10/26)
+
+Na primeira parte da semana foi criado a base do Laravel, instalação do laravel e migrations. Contendo:
+- projeto Laravel inicializado;
+- arquivo .env.example sem credenciais pessoais;
+- instruções de instalação no README.md ;
+- conexão com PostgreSQL;
+- migrations para usuários, categorias, chamados, comentários e histórico;
+- chaves estrangeiras e índices;
+- rota GET /api/saude retornando JSON.
+
+Na segunda parte da semana foi desenvolvido:
+- models;
+- relacionamentos;
+- factories;
+- seeders.
+
+
+

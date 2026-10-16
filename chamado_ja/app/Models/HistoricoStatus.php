@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class HistoricoStatus extends Model
 {
+    use HasFactory;
     protected $table='historico_status';
     protected $primaryKey='id_historico';
     protected $fillable=[
@@ -16,6 +18,6 @@ class HistoricoStatus extends Model
     ];
 
     public function chamado(){
-        return $this->hasMany('App/Chamado', 'chamado_id','id_chamado');
+        return $this->belongsTo(Chamado::class, 'chamado_id','id_chamado');
     }
 }

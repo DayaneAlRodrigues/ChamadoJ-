@@ -28,7 +28,6 @@
 | `id_comentario` | integer   | PK, incremento automático            |
 | `comentario`    | varchar   | NOT NULL                             |
 | `chamado_id`    | integer   | FK → `chamados.id_chamado`, NOT NULL |
-| `usuario_id`    | integer   | FK → `usuarios.id_usuario`, NOT NULL |
 | `created_at`    | timestamp | —                                    |
 
 ---
@@ -57,7 +56,6 @@
 | `status`       | varchar   | NOT NULL                             |
 | `created_at`   | timestamp | —                                    |
 | `chamado_id`   | integer   | FK → `chamados.id_chamado`, NOT NULL |
-| `usuario_id`   | integer   | FK → `usuarios.id_usuario`, NOT NULL |
 
 
 ---

@@ -14,11 +14,10 @@ return new class extends Migration
         Schema::create('chamados', function (Blueprint $table) {
             $table->id('id_chamado');
             $table->string('titulo');
-            $table->string('descricao');
+            $table->text('descricao');
             $table->string('status')->default('aberto')->index();
             $table->string('prioridade')->index();
-            $table->timestamps('created_at');
-            $table->timestamps('updated_at');
+            $table->timestamps();
             $table->foreignId('usuario_id')
                     ->constrained(
                         table:'usuarios',

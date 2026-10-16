@@ -26,7 +26,9 @@ class CategoriaFactory extends Factory
                 'Periféricos',
                 'Banco de Dados',
                 'Aplicativos',
-                'Segurança'
+                'Segurança',
+                'Site',
+                'Servidor'
             ]),
             'tipo'=>fake()->randomElement([
                 'Hardware',

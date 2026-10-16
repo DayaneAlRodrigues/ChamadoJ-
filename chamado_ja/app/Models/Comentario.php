@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Comentario extends Model
 {
+    use HasFactory;
     protected $table='comentarios';
     protected $primaryKey='id_comentario';
     protected $fillable=[
@@ -16,6 +18,6 @@ class Comentario extends Model
     ];
 
     public function chamado(){
-        return $this->belongsTo('App/Chamado', 'chamado_id', 'id_chamado');
+        return $this->belongsTo(Chamado::class, 'chamado_id','id_chamado');
     }
 }

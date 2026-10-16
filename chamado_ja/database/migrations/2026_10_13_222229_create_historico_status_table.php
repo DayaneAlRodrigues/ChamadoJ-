@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('historico_status', function (Blueprint $table) {
             $table->id('id_historico');
             $table->string('status');
-            $table->timestamps('created_at');
+            $table->timestamps();
             $table->foreignId('chamado_id')
                     ->constrained(
                         table:'chamados',

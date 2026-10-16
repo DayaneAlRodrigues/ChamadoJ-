@@ -20,8 +20,8 @@ class Usuario extends Model
 
     ];
 
-    public function chamado(){
-        return $this->hasMany('App/Chamado', 'id_usuario','usuario_id');
+    public function chamados(){
+        return $this->hasMany(Chamado::class, 'usuario_id','id_usuario');
     }
     
 }

@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Chamado extends Model
 {
+    use HasFactory;
     protected $table='chamados';
     protected $primaryKey='id_chamado';
     protected $fillable=[
@@ -21,18 +23,18 @@ class Chamado extends Model
     ];
 
     public function usuario(){
-        return $this->belongsTo('App/Usuario', 'usuario_id', 'id_usuario');
+        return $this->belongsTo(Usuario::class, 'usuario_id','id_usuario');
     }
 
     public function categoria(){
-        return $this->belongsTo('App/Categoria','categoria_id','id_categoria');
+        return $this->belongsTo(Categoria::class,'categoria_id','id_categoria');
     }
 
-    public function comentario(){
-        return $this->hasMany('App/Comentario', 'id_chamado', 'chamado_id');
+    public function comentarios(){
+        return $this->hasMany(Comentario::class, 'chamado_id','id_chamado');
     }
 
-    public function historico(){
-        return $this->hasMany('App/HistoricoStatus', 'id_chamado','chamado_id');
+    public function historicos(){
+        return $this->hasMany(HistoricoStatus::class, 'chamado_id','id_chamado');
     }
 }

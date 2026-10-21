@@ -2,55 +2,84 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DeleteChamadoRequest;
 use App\Http\Requests\StoreChamadoRequest;
 use App\Http\Requests\UpdateChamadoRequest;
+use App\Http\Resources\ChamadoResource;
 use App\Models\Chamado;
-use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class ChamadoController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $chamados = Chamado::all();
 
-        return response()->json($chamados);
+        return (new ChamadoResource(
+            $chamados->load(['usuario', 'categoria'])
+        ))->response()->setStatusCode(Response::HTTP_OK);
     }
 
-    public function store(StoreChamadoRequest $request){
-        $dados = $request->validated();
+    public function store(StoreChamadoRequest $request)
+    {
 
-        $chamado = Chamado::create($dados);
+        $chamado = Chamado::create([
+            ...$request->validated(),
+            'status' => 'aberto',
+        ]);
 
-        return response()->json($chamado, 201);
+        return (new ChamadoResource(
+            $chamado->load(['usuario', 'categoria'])
+        ))->response()->setStatusCode(Response::HTTP_CREATED);
     }
 
-    public function show(int $id){
-        $chamado = Chamado::where('id_chamado',$id)->first();
+    public function show(int $id)
+    {
+        $chamado = Chamado::where('id_chamado', $id)->first();
 
-        if(!$chamado){
+        if (!$chamado) {
             return response()->json([
-                'message'=> 'Chamado não encontrado.'
-            ], 404);
+                'message' => 'Chamado não encontrado.'
+            ], Response::HTTP_NOT_FOUND);
         }
 
-        if($chamado){
-            return response()->json($chamado,200);
+        if ($chamado) {
+            return (new ChamadoResource(
+                $chamado->load(['usuario', 'categoria'])
+            ))->response()->setStatusCode(Response::HTTP_OK);
         }
     }
 
-    public function update(UpdateChamadoRequest $request, int $id){
-        $chamado =  Chamado::where('id_chamado',$id)->first();
+    public function update(UpdateChamadoRequest $request, int $id)
+    {
+        $chamado = Chamado::where('id_chamado', $id)->first();
 
-        if(!$chamado){
+        if (!$chamado) {
             return response()->json([
-                'message'=> 'Chamado não encontrado.'
-            ], 404);
+                'message' => 'Chamado não encontrado.'
+            ], Response::HTTP_NOT_FOUND);
         }
 
         $dados = $request->validated();
 
         $chamado->update($dados);
 
-        return response()->json($chamado,200);
+        return (new ChamadoResource(
+            $chamado->load(['usuario', 'categoria'])
+        ))->response()->setStatusCode(Response::HTTP_OK);
+    }
 
+    public function destroy( int $id){
+        $chamado= Chamado::where('id_chamado',$id)->first();
+
+        if (!$chamado) {
+            return response()->json([
+                'message' => 'Chamado não encontrado.'
+            ], Response::HTTP_NOT_FOUND);
+        }
+
+        $chamado->delete();
+
+        return response()->noContent();
     }
 }

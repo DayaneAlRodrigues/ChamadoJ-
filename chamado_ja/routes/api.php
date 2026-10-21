@@ -24,5 +24,6 @@ Route::get('/api/chamados', [ChamadoController::class, 'index']);
 Route::post('/api/chamados',[ChamadoController::class,'store']);
 Route::get('/api/chamados/{id}', [ChamadoController::class, 'show']);
 Route::patch('/api/chamados/{id}', [ChamadoController::class,'update']);
+Route::delete('/chamados/{id}', [ChamadoController::class, 'destroy']);
 
 ?>

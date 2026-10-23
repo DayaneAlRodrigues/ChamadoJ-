@@ -32,13 +32,11 @@ CREATE TABLE comentarios (
     id_comentario SERIAL PRIMARY KEY,
     comentario VARCHAR(500) NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    chamado_id INTEGER NOT NULL REFERENCES chamados(id_chamados)  
-    usuario_id INTEGER NOT NULL REFERENCES usuarios(id_usuario));
+    chamado_id INTEGER NOT NULL REFERENCES chamados(id_chamados);
 
 CREATE TABLE historico_status (
     id_historico SERIAL PRIMARY KEY,
     status VARCHAR(50) NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    chamado_id INTEGER NOT NULL REFERENCES chamados(id_chamados),
-    usuario_id INTEGER NOT NULL REFERENCES usuarios(id_usuario));
+    chamado_id INTEGER NOT NULL REFERENCES chamados(id_chamados);
 

@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CategoriaResource;
 use App\Models\Categoria;
-use Illuminate\Http\Request;
 use App\Http\Requests\StoreCategoriaRequest;
+use Symfony\Component\HttpFoundation\Response;
+
 
 class CategoriaController extends Controller
 {
     public function index(){
         $categorias = Categoria::all();
 
-        return response()->json($categorias);
+        return (new CategoriaResource($categorias))
+        ->response()->setStatusCode(Response::HTTP_OK);
 
     }
 
@@ -20,7 +23,23 @@ class CategoriaController extends Controller
 
         $categoria = Categoria::create($dados);
 
-        return response()->json($categoria,201);
+        return (new CategoriaResource($categoria))
+        ->response()->setStatusCode(Response::HTTP_CREATED);
 
+    }
+
+    public function show(int $id){
+        $categoria = Categoria::where('id_categoria', $id);
+
+        if(!$categoria){
+            return response()->json([
+                'message'=> 'Categoria não encontrada'
+            ], Response::HTTP_NOT_FOUND);
+        }
+
+        if($categoria){
+            return (new CategoriaResource($categoria))
+            ->response()->setStatusCode(Response::HTTP_OK);
+        }
     }
 }

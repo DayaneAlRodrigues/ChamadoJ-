@@ -49,6 +49,19 @@ A terceira semana (12/10/26 - 17/10/26) foi desenvolvido o início da aplicaçã
 - Seeders
 - Instruçoes de instalação e configuração no Readme.
 
+A quarta semana  (19/10/26 - 24/10/26) - API principal de usuários, categorias e chamados
+Durante a quarta semana, foi desenvolvido o CRUD principal de chamados e implementadas as principais rotas da API REST, incluindo operações de consulta e cadastro de usuários e categorias.
+As principais entregas foram:
+
+- Organização e configuração das rotas da API;
+- Implementação de respostas padronizadas em JSON por meio de API Resources;
+- Validação dos dados recebidos utilizando Form Requests;
+- Tratamento de dados inválidos e de referências a usuários e categorias inexistentes;
+- Definição do status inicial dos chamados como `aberto`;
+- Utilização de códigos HTTP adequados para representar os resultados das requisições;
+- Realização de testes manuais dos endpoints;
+- Documentação de exemplos de uso das rotas e das requisições no `README.md`.
+
 ## 2 Instalação e configuração
 
 ### 2.1. Pré-requisitos
@@ -135,3 +148,175 @@ Por padrão, a aplicação ficará disponível em:
 Com o servidor em execução, utilize uma ferramenta como Postman ou Insomnia para enviar requisições HTTP à API.
 
 Consulte a documentação do projeto para conhecer os endpoints disponíveis, os parâmetros aceitos e os formatos das requisições e respostas.
+
+## 3 Testes 
+Esses testes foi utilizando o curl via terminal e também pode ser usado outro programa como Postman, Insonia.
+
+### 3.1 Inicie a API Laravel
+php artisan serve
+
+Confirme se o curl está instalado:
+curl --version
+
+Confira também as rotas da API:
+php artisan route:list --path=api
+
+### 3.2 Teste 1 — Criar um chamado válido
+Enviar uma requisição POST com os dados de um chamado.
+
+curl -i -X POST http://127.0.0.1:8000/api/chamados \
+  -H "Accept: application/json" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "titulo": "Computador não liga",
+    "descricao": "O computador não liga após pressionar o botão de energia.",
+    "prioridade": "alta",
+    "usuario_id": 1,
+    "categoria_id": 1
+  }'
+  
+ Resultado:
+ HTTP/1.1 201 Created
+Host: 127.0.0.1:8000
+Connection: close
+X-Powered-By: PHP/8.4.24
+Cache-Control: no-cache, private
+Date: Tue, 27 Oct 2026 18:23:02 GMT
+Content-Type: application/json
+Access-Control-Allow-Origin: *
+
+{"data":{"id":11,"titulo":"Computador n\u00e3o liga","descricao":"O computador n\u00e3o liga ap\u00f3s pressionar o bot\u00e3o de energia.","status":"aberto","prioridade":"alta","created_at":"2026-10-27T18:23:02.000000Z","updated_at":"2026-10-27T18:23:02.000000Z"}}
+ 
+### 3.3 Teste 2 — Criar um chamado sem título
+Verificar se a API rejeita um chamado sem o campo obrigatório titulo
+
+curl -i -X POST http://127.0.0.1:8000/api/chamados \
+  -H "Accept: application/json" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "descricao": "O computador não liga.",
+    "prioridade": "alta",
+    "usuario_id": 1,
+    "categoria_id": 1
+  }'
+
+Resultado:
+HTTP/1.1 422 Unprocessable Content
+Host: 127.0.0.1:8000
+Connection: close
+X-Powered-By: PHP/8.4.24
+Cache-Control: no-cache, private
+Date: Tue, 27 Oct 2026 18:23:59 GMT
+Content-Type: application/json
+Access-Control-Allow-Origin: *
+
+{"message":"The titulo field is required.","errors":{"titulo":["The titulo field is required."]}}
+
+### 3.4 Teste 3 — Criar um chamado com categoria inexistente
+Informar um categoria_id que não existe no banco de dados.
+
+curl -i -X POST http://127.0.0.1:8000/api/chamados \
+  -H "Accept: application/json" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "titulo": "Problema de conexão",
+    "descricao": "O computador não consegue acessar a rede.",
+    "prioridade": "média",
+    "usuario_id": 1,
+    "categoria_id": 999999
+  }'
+  
+  Resposta:
+  HTTP/1.1 422 Unprocessable Content
+Host: 127.0.0.1:8000
+Connection: close
+X-Powered-By: PHP/8.4.24
+Cache-Control: no-cache, private
+Date: Tue, 27 Oct 2026 18:24:45 GMT
+Content-Type: application/json
+Access-Control-Allow-Origin: *
+
+{"message":"The selected prioridade is invalid. (and 1 more error)","errors":{"prioridade":["The selected prioridade is invalid."],"categoria_id":["The selected categoria id is invalid."]}}
+
+### 3.5 Teste 5 — Consultar um chamado inexistente
+Consultar um ID que não existe.
+
+curl -i http://127.0.0.1:8000/api/chamados/999999 \
+  -H "Accept: application/json"
+
+Resultado:
+ HTTP/1.1 404 Not Found
+Host: 127.0.0.1:8000
+Connection: close
+X-Powered-By: PHP/8.4.24
+Cache-Control: no-cache, private
+Date: Tue, 27 Oct 2026 18:26:15 GMT
+Content-Type: application/json
+Access-Control-Allow-Origin: *
+
+{"message":"Chamado n\u00e3o encontrado."}
+
+### 3.6 Teste 6 — Atualizar os dados de um chamado com PATCH
+Atualizar o título e a prioridade do chamado criado anteriormente.
+
+curl -i -X PATCH "http://127.0.0.1:8000/api/chamados/11" \
+  -H "Accept: application/json" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "titulo": "Computador não liga após atualização",
+    "prioridade": "alta"
+  }'
+
+Resultado:
+
+HTTP/1.1 200 OK
+Host: 127.0.0.1:8000
+Connection: close
+X-Powered-By: PHP/8.4.24
+Cache-Control: no-cache, private
+Date: Tue, 27 Oct 2026 18:39:08 GMT
+Content-Type: application/json
+Access-Control-Allow-Origin: *
+
+{"data":{"id":11,"titulo":"Computador n\u00e3o liga ap\u00f3s atualiza\u00e7\u00e3o","descricao":"O computador n\u00e3o liga ap\u00f3s pressionar o bot\u00e3o de energia.","status":"aberto","prioridade":"alta","created_at":"2026-10-27T18:23:02.000000Z","updated_at":"2026-10-27T18:39:08.000000Z"}}
+
+### 3.7 Teste 7 — Cadastrar um usuário com e-mail repetido
+Esse teste para regra de unicidade para o e-mail.
+
+Primeira requisição:
+
+curl -i -X POST http://127.0.0.1:8000/api/usuarios \
+  -H "Accept: application/json" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "nome_usuario": "Usuario Teste",
+    "email": "teste.chamadoja@example.com",
+    "senha": "SenhaSegura123!"
+  }'
+  
+Resposta:
+HTTP/1.1 201 Created
+Host: 127.0.0.1:8000
+Connection: close
+X-Powered-By: PHP/8.4.24
+Cache-Control: no-cache, private
+Date: Tue, 27 Oct 2026 18:31:20 GMT
+Content-Type: application/json
+Access-Control-Allow-Origin: *
+
+{"data":{"id":11,"nome":"Usuario Teste","email":"teste.chamadoja@example.com"}}
+
+
+Segunda requisição com o mesmo comando.
+Resultado:
+HTTP/1.1 422 Unprocessable Content
+Host: 127.0.0.1:8000
+Connection: close
+X-Powered-By: PHP/8.4.24
+Cache-Control: no-cache, private
+Date: Tue, 27 Oct 2026 18:32:08 GMT
+Content-Type: application/json
+Access-Control-Allow-Origin: *
+
+{"message":"The email has already been taken.","errors":{"email":["The email has already been taken."]}}
+

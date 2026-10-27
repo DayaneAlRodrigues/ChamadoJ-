@@ -52,5 +52,28 @@ Na segunda parte da semana foi desenvolvido:
 - factories;
 - seeders.
 
+### Semana 4 — Desenvolvimento da API principal de usuários, categorias e chamados
+
+Durante o primeiro encontro, foram desenvolvidos os principais endpoints da API REST do ChamadoJá, permitindo realizar operações de consulta e cadastro de usuários e categorias, além da listagem, abertura, consulta e atualização de chamados.
+
+**Endpoints implementados:**
+
+- `GET /api/usuarios` — Listar usuários.
+- `POST /api/usuarios` — Cadastrar usuário.
+- `GET /api/categorias` — Listar categorias.
+- `POST /api/categorias` — Cadastrar categoria.
+- `GET /api/chamados` — Listar chamados.
+- `POST /api/chamados` — Abrir chamado.
+- `GET /api/chamados/{id}` — Consultar um chamado específico.
+- `PATCH /api/chamados/{id}` — Atualizar parcialmente os dados de um chamado.
+
+Também foram utilizados **Form Requests** para centralizar as regras de validação dos dados recebidos pela API, contribuindo para a organização do código e a consistência das informações.
+
+No segundo encontro, foi concluído o desenvolvimento das principais operações do CRUD de chamados, incluindo a exclusão de registros. Também foram implementados **API Resources** para padronizar a estrutura das respostas em JSON.
+
+Por fim, foram realizados testes manuais dos endpoints para verificar seu funcionamento, validar as respostas HTTP e identificar possíveis ajustes. Os testes e seus resultados foram documentados no `README.md` do projeto.
+
+
+
 
 

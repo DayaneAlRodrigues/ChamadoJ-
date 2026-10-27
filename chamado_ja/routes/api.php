@@ -15,20 +15,20 @@ Route::get('/saude', function (): JsonResponse {
         ]);
     });
 
-Route::get('/api/usuarios', [UsuarioController::class,'index']);
-Route::post('/api/usuarios', [UsuarioController::class, 'store']);
-Route::get('/api/usuarios/{id}', [UsuarioController::class,'show']);
+Route::get('/usuarios', [UsuarioController::class,'index']);
+Route::post('/usuarios', [UsuarioController::class, 'store']);
+Route::get('/usuarios/{id}', [UsuarioController::class,'show']);
 
-Route::get('/api/categorias', [CategoriaController::class, 'index']);
-Route::post('/api/categorias',[CategoriaController::class,'store']);
-Route::get('/api/categorias/{id}', [CategoriaController::class,'show']);
+Route::get('/categorias', [CategoriaController::class, 'index']);
+Route::post('/categorias',[CategoriaController::class,'store']);
+Route::get('/categorias/{id}', [CategoriaController::class,'show']);
 
-Route::get('/api/chamados', [ChamadoController::class, 'index']);
-Route::post('/api/chamados',[ChamadoController::class,'store']);
-Route::get('/api/chamados/{id}', [ChamadoController::class, 'show']);
-Route::patch('/api/chamados/{id}', [ChamadoController::class,'update']);
+Route::get('/chamados', [ChamadoController::class, 'index']);
+Route::post('/chamados',[ChamadoController::class,'store']);
+Route::get('/chamados/{id}', [ChamadoController::class, 'show']);
+Route::patch('/chamados/{id}', [ChamadoController::class,'update']);
 Route::delete('/chamados/{id}', [ChamadoController::class, 'destroy']);
 
-Route::post('/api/chamados/{id}/comentarios', [ComentarioController::class, 'store']);
+Route::post('/chamados/{id}/comentarios', [ComentarioController::class, 'store']);
 
 ?>

@@ -2,6 +2,7 @@
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ChamadoController;
 use App\Http\Controllers\ComentarioController;
+use App\Http\Controllers\HistoricoStatusController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\JsonResponse;
@@ -28,7 +29,10 @@ Route::post('/chamados',[ChamadoController::class,'store']);
 Route::get('/chamados/{id}', [ChamadoController::class, 'show']);
 Route::patch('/chamados/{id}', [ChamadoController::class,'update']);
 Route::delete('/chamados/{id}', [ChamadoController::class, 'destroy']);
+Route::patch('/chamados/{id}/status', [ChamadoController::class, 'updateStatus']);
 
+Route::get('/chamados/{id}/comentarios', [ComentarioController::class, 'index']);
 Route::post('/chamados/{id}/comentarios', [ComentarioController::class, 'store']);
 
+Route::get('chamados/{id}/historico', [HistoricoStatusController::class, 'index']);
 ?>

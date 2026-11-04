@@ -320,3 +320,97 @@ Access-Control-Allow-Origin: *
 
 {"message":"The email has already been taken.","errors":{"email":["The email has already been taken."]}}
 
+## 4 Testes dos filtros
+### 4.1 Filtrar por status
+
+curl -i http://localhost:8000/api/chamados?status=aberto
+
+Resposta:
+HTTP/1.1 200 OK
+Host: localhost:8000
+Connection: close
+X-Powered-By: PHP/8.4.24
+Cache-Control: no-cache, private
+Date: Wed, 04 Nov 2026 18:27:45 GMT
+Content-Type: application/json
+Access-Control-Allow-Origin: *
+
+{"data":[{"id":4,"titulo":"Qui in sequi eligendi eos.","descricao":"Repellat a nisi ab repellat. Quisquam iste est illo voluptatem nisi. Deserunt reprehenderit et sed praesentium expedita nesciunt et. Atque maiores sed eum.","status":"aberto","prioridade":"baixa","created_at":"2026-10-16T20:11:22.000000Z","updated_at":"2026-10-16T20:11:22.000000Z"},{"id":7,"titulo":"Quaerat dolorum facilis illum architecto nihil enim.","descricao":"Excepturi vitae itaque molestiae velit fugiat aut minima necessitatibus. Quaerat voluptate minus asperiores. Cum sit quaerat ut recusandae corrupti quisquam vitae.","status":"aberto","prioridade":"alta","created_at":"2026-10-16T20:11:22.000000Z","updated_at":"2026-10-16T20:11:22.000000Z"},{"id":9,"titulo":"Cupiditate quia voluptas adipisci eum quis.","descricao":"Cum architecto voluptatem est ea et explicabo atque. Dolorem sed aut sed molestias placeat. Esse voluptas illo in commodi sint. Consectetur laborum nisi est quod quam laudantium dignissimos.","status":"aberto","prioridade":"baixa","created_at":"2026-10-16T20:11:22.000000Z","updated_at":"2026-10-16T20:11:22.000000Z"},{"id":11,"titulo":"Computador n\u00e3o liga ap\u00f3s atualiza\u00e7\u00e3o","descricao":"O computador n\u00e3o liga ap\u00f3s pressionar o bot\u00e3o de energia.","status":"aberto","prioridade":"alta","created_at":"2026-10-27T18:23:02.000000Z","updated_at":"2026-10-27T18:39:08.000000Z"}]}
+
+### 4.2 Filtrar por prioridade
+
+curl -i http://localhost:8000/api/chamados?prioridade=alta
+
+Resposta:
+HTTP/1.1 200 OK
+Host: localhost:8000
+Connection: close
+X-Powered-By: PHP/8.4.24
+Cache-Control: no-cache, private
+Date: Wed, 04 Nov 2026 18:34:09 GMT
+Content-Type: application/json
+Access-Control-Allow-Origin: *
+
+{"data":[{"id":3,"titulo":"Aliquam sint eum velit provident quia temporibus deleniti.","descricao":"Animi illo placeat aliquam et. Sit alias impedit voluptatem et aut voluptatem. Ullam recusandae dolorum laborum voluptate. Officiis non reiciendis aut molestiae veniam est id aspernatur.","status":"em atendimento","prioridade":"alta","created_at":"2026-10-16T20:11:22.000000Z","updated_at":"2026-10-16T20:11:22.000000Z"},{"id":5,"titulo":"Cumque amet iure voluptas impedit.","descricao":"Vel quaerat quae iure. Consequatur est sint non sint consequatur consectetur. Eaque tenetur sunt voluptate magnam incidunt quia asperiores.","status":"fechado","prioridade":"alta","created_at":"2026-10-16T20:11:22.000000Z","updated_at":"2026-10-16T20:11:22.000000Z"},{"id":6,"titulo":"Ut natus sunt dolores repudiandae.","descricao":"Vel deleniti ipsum cupiditate. Est blanditiis qui voluptate asperiores. Alias quae et qui ullam.","status":"fechado","prioridade":"alta","created_at":"2026-10-16T20:11:22.000000Z","updated_at":"2026-10-16T20:11:22.000000Z"},{"id":7,"titulo":"Quaerat dolorum facilis illum architecto nihil enim.","descricao":"Excepturi vitae itaque molestiae velit fugiat aut minima necessitatibus. Quaerat voluptate minus asperiores. Cum sit quaerat ut recusandae corrupti quisquam vitae.","status":"aberto","prioridade":"alta","created_at":"2026-10-16T20:11:22.000000Z","updated_at":"2026-10-16T20:11:22.000000Z"},{"id":8,"titulo":"Reiciendis dolores ut dolor quis.","descricao":"Laborum excepturi et non ut. Debitis magni maiores ea esse aut sint officiis voluptatibus. Et dicta cumque non amet id ut omnis quia.","status":"em atendimento","prioridade":"alta","created_at":"2026-10-16T20:11:22.000000Z","updated_at":"2026-10-16T20:11:22.000000Z"},{"id":10,"titulo":"Esse ea quas exercitationem magni.","descricao":"Tenetur beatae quibusdam voluptatibus cupiditate ipsa. Mollitia excepturi qui molestiae totam ea. Eligendi illum est voluptatem eum nihil libero unde. Quisquam ut neque at dolorem ipsum rerum est.","status":"fechado","prioridade":"alta","created_at":"2026-10-16T20:11:22.000000Z","updated_at":"2026-10-16T20:11:22.000000Z"},{"id":11,"titulo":"Computador n\u00e3o liga ap\u00f3s atualiza\u00e7\u00e3o","descricao":"O computador n\u00e3o liga ap\u00f3s pressionar o bot\u00e3o de energia.","status":"aberto","prioridade":"alta","created_at":"2026-10-27T18:23:02.000000Z","updated_at":"2026-10-27T18:39:08.000000Z"}]}
+
+### 4.3 Filtrar por categoria e status
+
+curl -i http://localhost:8000/api/chamados?categoria_id=2&status=aberto
+
+Resposta:
+HTTP/1.1 200 OK
+Host: localhost:8000
+Connection: close
+X-Powered-By: PHP/8.4.24
+Cache-Control: no-cache, private
+Date: Wed, 04 Nov 2026 18:46:26 GMT
+Content-Type: application/json
+Access-Control-Allow-Origin: *
+
+{"data":[]}
+[1]+  Concluído              curl -i http://localhost:8000/api/chamados?categoria_id=2
+
+### 4.4 Filtrar por usuario
+
+curl -i http://localhost:8000/api/chamados?usuario_id=3
+
+Resposta:
+HTTP/1.1 200 OK
+Host: localhost:8000
+Connection: close
+X-Powered-By: PHP/8.4.24
+Cache-Control: no-cache, private
+Date: Wed, 04 Nov 2026 18:48:04 GMT
+Content-Type: application/json
+Access-Control-Allow-Origin: *
+
+{"data":[{"id":1,"titulo":"Nesciunt a nisi autem omnis voluptas accusantium magni.","descricao":"Odio nulla eius quos in facere veniam nesciunt debitis. Placeat consequuntur ut beatae sequi quod. Est et nostrum deserunt et velit illum. Nostrum sapiente eveniet ipsum doloribus recusandae.","status":"em atendimento","prioridade":"m\u00e9dia","created_at":"2026-10-16T20:11:22.000000Z","updated_at":"2026-10-16T20:11:22.000000Z"},{"id":6,"titulo":"Ut natus sunt dolores repudiandae.","descricao":"Vel deleniti ipsum cupiditate. Est blanditiis qui voluptate asperiores. Alias quae et qui ullam.","status":"fechado","prioridade":"alta","created_at":"2026-10-16T20:11:22.000000Z","updated_at":"2026-10-16T20:11:22.000000Z"}]}
+
+### 4.5 Filtrar por período
+
+curl -i http://localhost:8000/api/chamados?data_inicio=2026-10-01&data_fim=2026-10-31
+
+Resposta:
+HTTP/1.1 200 OK
+Host: localhost:8000
+Connection: close
+X-Powered-By: PHP/8.4.24
+Cache-Control: no-cache, private
+Date: Wed, 04 Nov 2026 19:19:19 GMT
+Content-Type: application/json
+Access-Control-Allow-Origin: *
+
+{"data":[{"id":1,"titulo":"Nesciunt a nisi autem omnis voluptas accusantium magni.","descricao":"Odio nulla eius quos in facere veniam nesciunt debitis. Placeat consequuntur ut beatae sequi quod. Est et nostrum deserunt et velit illum. Nostrum sapiente eveniet ipsum doloribus recusandae.","status":"em atendimento","prioridade":"m\u00e9dia","created_at":"2026-10-16T20:11:22.000000Z","updated_at":"2026-10-16T20:11:22.000000Z"},{"id":2,"titulo":"Sint impedit aut omnis et quis nisi.","descricao":"Animi eius est a quo cupiditate. Amet maxime voluptas explicabo a et et id.","status":"em atendimento","prioridade":"urgente","created_at":"2026-10-16T20:11:22.000000Z","updated_at":"2026-10-16T20:11:22.000000Z"},{"id":3,"titulo":"Aliquam sint eum velit provident quia temporibus deleniti.","descricao":"Animi illo placeat aliquam et. Sit alias impedit voluptatem et aut voluptatem. Ullam recusandae dolorum laborum voluptate. Officiis non reiciendis aut molestiae veniam est id aspernatur.","status":"em atendimento","prioridade":"alta","created_at":"2026-10-16T20:11:22.000000Z","updated_at":"2026-10-16T20:11:22.000000Z"},{"id":4,"titulo":"Qui in sequi eligendi eos.","descricao":"Repellat a nisi ab repellat. Quisquam iste est illo voluptatem nisi. Deserunt reprehenderit et sed praesentium expedita nesciunt et. Atque maiores sed eum.","status":"aberto","prioridade":"baixa","created_at":"2026-10-16T20:11:22.000000Z","updated_at":"2026-10-16T20:11:22.000000Z"},{"id":5,"titulo":"Cumque amet iure voluptas impedit.","descricao":"Vel quaerat quae iure. Consequatur est sint non sint consequatur consectetur. Eaque tenetur sunt voluptate magnam incidunt quia asperiores.","status":"fechado","prioridade":"alta","created_at":"2026-10-16T20:11:22.000000Z","updated_at":"2026-10-16T20:11:22.000000Z"},{"id":6,"titulo":"Ut natus sunt dolores repudiandae.","descricao":"Vel deleniti ipsum cupiditate. Est blanditiis qui voluptate asperiores. Alias quae et qui ullam.","status":"fechado","prioridade":"alta","created_at":"2026-10-16T20:11:22.000000Z","updated_at":"2026-10-16T20:11:22.000000Z"},{"id":7,"titulo":"Quaerat dolorum facilis illum architecto nihil enim.","descricao":"Excepturi vitae itaque molestiae velit fugiat aut minima necessitatibus. Quaerat voluptate minus asperiores. Cum sit quaerat ut recusandae corrupti quisquam vitae.","status":"aberto","prioridade":"alta","created_at":"2026-10-16T20:11:22.000000Z","updated_at":"2026-10-16T20:11:22.000000Z"},{"id":8,"titulo":"Reiciendis dolores ut dolor quis.","descricao":"Laborum excepturi et non ut. Debitis magni maiores ea esse aut sint officiis voluptatibus. Et dicta cumque non amet id ut omnis quia.","status":"em atendimento","prioridade":"alta","created_at":"2026-10-16T20:11:22.000000Z","updated_at":"2026-10-16T20:11:22.000000Z"},{"id":9,"titulo":"Cupiditate quia voluptas adipisci eum quis.","descricao":"Cum architecto voluptatem est ea et explicabo atque. Dolorem sed aut sed molestias placeat. Esse voluptas illo in commodi sint. Consectetur laborum nisi est quod quam laudantium dignissimos.","status":"aberto","prioridade":"baixa","created_at":"2026-10-16T20:11:22.000000Z","updated_at":"2026-10-16T20:11:22.000000Z"},{"id":10,"titulo":"Esse ea quas exercitationem magni.","descricao":"Tenetur beatae quibusdam voluptatibus cupiditate ipsa. Mollitia excepturi qui molestiae totam ea. Eligendi illum est voluptatem eum nihil libero unde. Quisquam ut neque at dolorem ipsum rerum est.","status":"fechado","prioridade":"alta","created_at":"2026-10-16T20:11:22.000000Z","updated_at":"2026-10-16T20:11:22.000000Z"},{"id":11,"titulo":"Computador n\u00e3o liga ap\u00f3s atualiza\u00e7\u00e3o","descricao":"O computador n\u00e3o liga ap\u00f3s pressionar o bot\u00e3o de energia.","status":"aberto","prioridade":"alta","created_at":"2026-10-27T18:23:02.000000Z","updated_at":"2026-10-27T18:39:08.000000Z"}],"links":{"first":"http:\/\/localhost:8000\/api\/chamados?page=1","last":"http:\/\/localhost:8000\/api\/chamados?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","page":null,"active":false},{"url":"http:\/\/localhost:8000\/api\/chamados?page=1","label":"1","page":1,"active":true},{"url":null,"label":"Next &raquo;","page":null,"active":false}],"path":"http:\/\/localhost:8000\/api\/chamados","per_page":15,"to":11,"total":11}}
+[1]+  Concluído              curl -i http://localhost:8000/api/chamados?data_inicio=2026-10-01
+
+
+## Ordenação e paginação
+
+Exemplos de requisições
+
+Objetivo	URL
+Ordenar por prioridade	?ordenar_por=prioridade
+Ordenar por status	?ordenar_por=status
+Mais antigos primeiro	?ordenar_por=created_at&direcao=asc
+Página 2	?page=2
+Combinar filtro e ordenação	?status=aberto&ordenar_por=prioridade

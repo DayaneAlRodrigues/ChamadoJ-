@@ -9,6 +9,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ComentarioController extends Controller
 {
+    public function index(){
+        $comentarios = Comentario::with('chamado')->get();
+
+        return ComentarioResource::collection($comentarios)
+            -> response()
+            ->setStatusCode(Response::HTTP_OK);
+    }
     public function store(StoreComentarioRequest $request)
     {
         $comentario = Comentario::create(

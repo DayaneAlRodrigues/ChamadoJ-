@@ -13,8 +13,9 @@ class CategoriaController extends Controller
     public function index(){
         $categorias = Categoria::all();
 
-        return (new CategoriaResource($categorias))
-        ->response()->setStatusCode(Response::HTTP_OK);
+        return CategoriaResource::collection($categorias)
+            ->response()
+            ->setStatusCode(Response::HTTP_OK);
 
     }
 
@@ -24,7 +25,8 @@ class CategoriaController extends Controller
         $categoria = Categoria::create($dados);
 
         return (new CategoriaResource($categoria))
-        ->response()->setStatusCode(Response::HTTP_CREATED);
+            ->response()
+            ->setStatusCode(Response::HTTP_CREATED);
 
     }
 
@@ -39,7 +41,8 @@ class CategoriaController extends Controller
 
         if($categoria){
             return (new CategoriaResource($categoria))
-            ->response()->setStatusCode(Response::HTTP_OK);
+                ->response()
+                ->setStatusCode(Response::HTTP_OK);
         }
     }
 }

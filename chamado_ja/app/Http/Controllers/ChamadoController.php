@@ -11,7 +11,8 @@ use App\Http\Resources\ChamadoResource;
 use App\Models\Chamado;
 use DomainException;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\Response;
+
 class ChamadoController extends Controller
 {
     public function index(Request $request)

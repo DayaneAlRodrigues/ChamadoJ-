@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\HistoricoStatusResource;
 use App\Models\HistoricoStatus;
-use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class HistoricoStatusController
 {

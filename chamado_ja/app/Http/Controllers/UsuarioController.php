@@ -40,10 +40,9 @@ class UsuarioController extends Controller
             ], Response::HTTP_NOT_FOUND);
         }
 
-        if($usuario){
             return (new UsuarioResource($usuario))
-            ->reponse()
+            ->response()
             ->setStatusCode(Response::HTTP_OK);
-        }
+        
     }
 }

@@ -13,7 +13,6 @@ class Categoria extends Model
      public $timestamps = false;
 
     protected $fillable=[
-        'id_categoria',
         'nome_categoria',
         'tipo'
     ];

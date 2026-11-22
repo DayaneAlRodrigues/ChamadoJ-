@@ -11,7 +11,6 @@ class Chamado extends Model
     protected $table='chamados';
     protected $primaryKey='id_chamado';
     protected $fillable=[
-        'id_chamado',
         'titulo',
         'descricao',
         'status',

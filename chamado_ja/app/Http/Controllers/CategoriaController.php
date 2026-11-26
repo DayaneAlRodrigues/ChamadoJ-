@@ -31,11 +31,11 @@ class CategoriaController extends Controller
     }
 
     public function show(int $id){
-        $categoria = Categoria::where('id_categoria', $id);
+        $categoria = Categoria::where('id_categoria', $id)->first();
 
         if(!$categoria){
             return response()->json([
-                'message'=> 'Categoria não encontrada'
+                'message'=> 'Categoria não encontrada.'
             ], Response::HTTP_NOT_FOUND);
         }
 

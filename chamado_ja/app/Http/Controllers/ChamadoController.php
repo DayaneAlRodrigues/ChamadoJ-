@@ -100,6 +100,11 @@ class ChamadoController extends Controller
             'status' => 'aberto',
         ]);
 
+        //registrar na tabela de historicosStatus
+        $chamado->historicosStatus()->create([
+            'status' => $chamado->status,
+        ]);
+
         return (new ChamadoResource(
             $chamado->load(['usuario', 'categoria'])
         ))
@@ -162,8 +167,7 @@ class ChamadoController extends Controller
         try{
             $chamado = $acao->executar(
                 $chamado,
-                $dados['status'],
-                $dados['usuario_id']
+                $dados['status']
             );
         }catch(DomainException $e){
             return response()->json([
@@ -191,4 +195,5 @@ class ChamadoController extends Controller
 
         return response()->noContent();
     }
+
 }

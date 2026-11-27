@@ -6,6 +6,7 @@ use App\Http\Requests\StoreComentarioRequest;
 use App\Http\Resources\ComentarioResource;
 use App\Models\Comentario;
 use Symfony\Component\HttpFoundation\Response;
+use App\Models\Chamado;
 
 class ComentarioController extends Controller
 {
@@ -16,9 +17,18 @@ class ComentarioController extends Controller
             -> response()
             ->setStatusCode(Response::HTTP_OK);
     }
-    public function store(StoreComentarioRequest $request)
+    
+    public function store(StoreComentarioRequest $request, int $id)
     {
-        $comentario = Comentario::create(
+        $chamado = Chamado::where('id_chamado', $id)->first();
+
+        if (!$chamado) {
+            return response()->json([
+                'message' => 'Chamado não encontrado.'
+            ], Response::HTTP_NOT_FOUND);
+        }
+
+        $comentario = $chamado->comentarios()->create(
             $request->validated()
         );
 

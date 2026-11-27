@@ -33,7 +33,7 @@ class Chamado extends Model
         return $this->hasMany(Comentario::class, 'chamado_id','id_chamado');
     }
 
-    public function historicos(){
+    public function historicosStatus(){
         return $this->hasMany(HistoricoStatus::class, 'chamado_id','id_chamado');
     }
 }

@@ -11,7 +11,6 @@ final class AlterarStatusDoChamado
     public function executar(
         Chamado $chamado,
         string $novoStatus,
-        int $usuarioId
     ): Chamado {
         $transicoesPermitidas = [
             'aberto' => ['em_atendimento'],
@@ -30,19 +29,15 @@ final class AlterarStatusDoChamado
 
         return DB::transaction(function () use (
             $chamado,
-            $novoStatus,
-            $usuarioId
+            $novoStatus
         ): Chamado {
-            $statusAnterior = $chamado->status;
 
             $chamado->update([
                 'status' => $novoStatus,
             ]);
 
             $chamado->historicosStatus()->create([
-                'usuario_id' => $usuarioId,
-                'status_anterior' => $statusAnterior,
-                'status_novo' => $novoStatus,
+                'status' => $novoStatus,
             ]);
 
             return $chamado->refresh();
